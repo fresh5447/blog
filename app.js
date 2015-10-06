@@ -11,6 +11,7 @@ var blog = require('./model/blogs');
 var blogs = require('./routes/blog');
 
 var app = express();
+var cors = require('cors');
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 // app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({origin:'http://localhost:8000', credentials:true}));
 
 app.get('/', function(req, res){
     res.sendFile('index.html');
@@ -34,6 +36,7 @@ app.get('/blog', function(req, res){
 });
 
 app.use('/api/blogs', blogs)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -65,6 +68,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
 
 
 module.exports = app;

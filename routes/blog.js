@@ -17,33 +17,30 @@ function filterByTitle(obj) {
 
 /* GET All Blogs */
 router.get('/', function(req, res) {
-	mongoose.model('Blog').find({}, function(err, blogs){
-		if(err){
-			return console.log(err);
-		} else {
-			var arrByTitle = blogs.filter(filterByTitle);
-			res.json(arrByTitle);
-		}
-	});
-})
-	.post('/', function(req, res){
-		var title = req.body.title;
-		var body = req.body.body;
+  mongoose.model('Blog').find({}, function(err, blogs){
+    if(err){
+      return console.log(err);
+    } else {
+      var arrByTitle = blogs.filter(filterByTitle);
+      res.json(arrByTitle);
+    }
+  });
+});
+router.post('/', function(req, res){
+    var title = req.body.title;
+    var body = req.body.body;
 
-		mongoose.model('Blog').create({
-			title: title,
-			body: body
-		}, function(err, blog){
-			if(err){
-				res.send("houston we have a problem")
-			} else{
-				res.writeHead(200, {
-      		'Content-Type':'application/json'
-    		});
-				console.log("New blog named " + blog + "created!");
-				res.json(blog);
-			}
-		});
-	});
+    mongoose.model('Blog').create({
+      title: title,
+      body: body
+    }, function(err, blog){
+      if(err){
+        res.send("houston we have a problem")
+      } else{
+        console.log("New blog named " + blog + "created!");
+        res.send(blog);
+      }
+    });
+  });
 
 module.exports = router;
