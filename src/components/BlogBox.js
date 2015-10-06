@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addPost} from '../actions/BlogActions'
+import {addPost, deletePost} from '../actions/BlogActions'
 import BlogList from './BlogList'
 import BlogForm from './BlogForm'
 
@@ -18,12 +18,19 @@ class BlogBox extends React.Component {
     dispatch(addPost(title, body))
   }
 
+
   render() {
-    const {blog} = this.props
+    const {blog, dispatch} = this.props
+
+    const handlePostDelete = (id) => {
+      console.log('Should delete post with id', id)
+      dispatch(deletePost(id))
+    }
+
     return(
       <div className="blogBox">
         <h1> Dougs Awesome Blog </h1>
-        <BlogList blog={blog}/>
+        <BlogList blog={blog} onPostDelete={handlePostDelete}/>
         <BlogForm onBlogSubmit={this.handleBlogSubmit}/>
       </div>
     );

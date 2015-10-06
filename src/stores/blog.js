@@ -19,6 +19,7 @@ export default (state=initialState, action) => {
         )
 
     case DELETE_BLOG_POST:
+      console.log('Delete post with id=', id)
       return state.filter( post => post.id !== id)
 
     default:

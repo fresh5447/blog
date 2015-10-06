@@ -6,11 +6,9 @@ import BlogPost from './BlogPost'
 class BlogList extends React.Component {
   render() {
 
-    const blogNodes = this.props.blog.map( blog =>
+    const blogNodes = this.props.blog.map( post =>
       (
-        <BlogPost title={blog.title}>
-          {blog.body}
-        </BlogPost>
+        <BlogPost post={post} onPostDelete={this.props.onPostDelete}/>
       )
     )
 

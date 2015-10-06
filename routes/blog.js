@@ -43,4 +43,23 @@ router.post('/', function(req, res){
     });
   });
 
+
+router.delete('/:id', function(req, res){
+  var id = req.params.id;
+
+  mongoose.model('Blog').remove({_id:id}, function(err, post){
+    if(err){
+      console.log('Error', err)
+      res.status(500).send('Error')
+      return
+    }
+
+    console.log('Post with id ', id, ' was deleted')
+    res.status(200).send({id:id})
+
+
+  })
+
+})
+
 module.exports = router;

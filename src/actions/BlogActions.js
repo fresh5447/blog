@@ -24,6 +24,20 @@ export const postAdded = (id, title, body) => ({
   id, title, body
 })
 
+export const postDeleted = (id) => ({
+  type: DELETE_BLOG_POST,
+  id
+})
+
+export const deletePost = (id) => {
+  console.log('Send delete request on server for id ', id)
+  return dispatch => {
+    axios.delete(URL+id).then(response => {
+      dispatch(postDeleted(id))
+    })
+  }
+}
+
 export const addPost = (title, body) => {
   console.log('Ading post to server')
   return dispatch => {
