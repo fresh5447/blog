@@ -8,6 +8,7 @@ export default (state=initialState, action) => {
   switch(action.type){
 
     case ADD_BLOG_POST:
+      console.log('Post is added to the store')
       return [...state, {id, title, body}]
 
     case EDIT_BLOG_POST:
